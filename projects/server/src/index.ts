@@ -14,19 +14,26 @@ const availableOptions: Array<OptionDefinition> = [
     {name: 'end', alias: 'e', type: Boolean, defaultOption: false},
     {name: 'background', alias: 'b', type: Boolean, defaultOption: false}
 ];
-const outputFile = path.join(process.cwd(), '.phaser-game-server-id');
+const outputFile = path.join(process.cwd(), '.phaser-game-server');
 
 const startBackground = () => {
-    const args = process.argv.filter(a => !a.includes('-b'));
-    const child: cp.ChildProcess = cp.spawn(args.join(' '), {
+    const argv = process.argv;
+    const command = argv.shift(); // node process
+    const args = argv
+        .filter(a => !a.includes('-b')); // remove background argument
+    const out = fs.openSync(outputFile + '.out.log', 'a');
+    const err = fs.openSync(outputFile + '.err.log', 'a');
+    console.info(`starting background process: ${command} ${args.join(' ')}`);
+    const child: cp.ChildProcess = cp.spawn(command, args, {
         detached: true,
-        stdio: 'inherit'
+        stdio: ['ignore', out, err]
     });
     if (child.pid) {
         fs.writeFileSync(outputFile, `${child.pid}`, {encoding: 'utf-8'});
     } else {
-        console.error(`unable to start background process using '${args.join(' ')}'`);
+        console.error(`unable to start background process using '${command} ${args.join(' ')}'`);
     }
+    child.unref();
 }
 
 const startForeground = () => {
@@ -38,7 +45,7 @@ const endBackground = () => {
     if (fs.existsSync(outputFile)) {
         const id = fs.readFileSync(outputFile, {encoding: 'utf-8'});
         if (id != null) {
-            process.kill(+id);
+            process.kill(+id, 'SIGINT');
         }
     } else {
         console.error(`no process id file could be found at: ${outputFile}`);

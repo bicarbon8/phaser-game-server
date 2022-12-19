@@ -17,7 +17,7 @@ export class ExampleScene extends Phaser.Scene {
     }
 
     private _setupSocketEventHandling(): void {
-        io.on('connection', (socket: Socket) => {
+        io?.on('connection', (socket: Socket) => {
             console.debug(`player: ${socket.id} connected`);
             socket.on('disconnect', () => {
                 console.debug(`player: ${socket.id} disconnected`);
