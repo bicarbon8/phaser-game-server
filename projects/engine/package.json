@@ -1,0 +1,29 @@
+{
+  "name": "phaser-game-server-engine",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "a headless phaser game engine to be run inside the phaser-game-server via jsdom",
+  "main": "dist/game-engine.js",
+  "types": "dist/game-engine.d.ts",
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "build": "npm run clean && tsc -b",
+    "test": ""
+  },
+  "keywords": [
+    "phaser",
+    "express.js",
+    "gameengine",
+    "gameserver"
+  ],
+  "author": "Jason Holt Smith <bicarbon8@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "phaser": "^3.55.2",
+    "socket.io": "^4.5.4"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^4.9.4"
+  }
+}

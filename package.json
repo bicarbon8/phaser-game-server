@@ -1,0 +1,20 @@
+{
+    "name": "phaser-game-server-monorepo",
+    "workspaces": [
+        "projects/*"
+    ],
+    "scripts": {
+        "clean": "rimraf ./dist && rimraf ./docs",
+        "build": "npm run clean && npm run build --workspaces --if-present",
+        "test": "npm run test --workspaces --if-present",
+        "start": "npm run start --workspaces --if-present"
+    },
+    "devDependencies": {
+        "copyfiles": "^2.4.1",
+        "dpdm": "^3.9.0",
+        "lerna": "^5.5.2",
+        "rimraf": "^3.0.2",
+        "typedoc": "^0.23.15"
+    },
+    "private": true
+}
