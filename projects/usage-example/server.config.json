@@ -1,5 +1,5 @@
 {
-    "allowedCorsOrigin": "http://localhost:4500",
+    "allowedCorsOrigin": "http://localhost",
     "serverRoot": "./dist",
     "scripts": [
         "vendors.bundle.js",

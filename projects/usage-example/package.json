@@ -9,8 +9,7 @@
     "build:dev": "npm run clean && webpack",
     "start": "npm run build && npm run open",
     "start:dev": "npm run build:dev && npm run open",
-    "open": "npx phaser-game-server -s -b",
-    "stop": "npx phaser-game-server -e",
+    "open": "npx phaser-game-server -s",
     "test": ""
   },
   "keywords": [
