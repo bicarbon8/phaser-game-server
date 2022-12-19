@@ -1,6 +1,6 @@
 {
   "name": "phaser-game-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "an express.js server that creates a socket.io connection and loads the phaser-game-server-engine",
   "bin": "dist/index.js",
   "main": "dist/game-server.js",

@@ -1,6 +1,6 @@
 {
   "name": "usage-example",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "description": "example usage of the phaser-game-server projects",
   "type": "module",
   "private": true,
@@ -23,8 +23,8 @@
   "license": "MIT",
   "dependencies": {
     "phaser": "^3.55.2",
-    "phaser-game-server": "^1.0.0",
-    "phaser-game-server-engine": "^1.0.0",
+    "phaser-game-server": "^1.0.1",
+    "phaser-game-server-engine": "^1.0.1",
     "socket.io": "^4.5.4"
   },
   "devDependencies": {
