@@ -23,7 +23,7 @@ export type GameEngineConfig = {
     | Function[];
 }
 
-export class GameEngine {
+export class GameServerEngine {
     private static readonly DEFAULT_CONFIG: Phaser.Types.Core.GameConfig = {
         type: Phaser.HEADLESS,
         width: 1,
@@ -48,7 +48,7 @@ export class GameEngine {
     constructor(config: GameEngineConfig) {
         console.debug('loaded game-engine file...');
         this._gameConfig = {
-            ...GameEngine.DEFAULT_CONFIG,
+            ...GameServerEngine.DEFAULT_CONFIG,
             scene: config.scene
         };
     }
@@ -64,7 +64,7 @@ export class GameEngine {
         return io;
     }
     
-    start(): GameEngine {
+    start(): GameServerEngine {
         console.debug('started phaser-game-engine...');
         this._game = new Phaser.Game(this._gameConfig);
         // once the game loop is loaded and running, signal to the server we are ready
@@ -73,7 +73,7 @@ export class GameEngine {
         return this;
     }
 
-    stop(): GameEngine {
+    stop(): GameServerEngine {
         this._game.destroy(false, false);
         this._game = null;
         return this;

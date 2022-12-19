@@ -1,5 +1,5 @@
 {
-  "name": "space-sim-server",
+  "name": "usage-example",
   "version": "1.0.0",
   "description": "example usage of the phaser-game-server projects",
   "type": "module",
@@ -9,7 +9,7 @@
     "build:dev": "npm run clean && tsc -b && webpack",
     "start": "npm run build && npm run open",
     "start:dev": "npm run build:dev && npm run open",
-    "open": "npx phaser-game-server",
+    "open": "npx phaser-game-server -s",
     "test": ""
   },
   "keywords": [

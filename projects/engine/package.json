@@ -3,8 +3,8 @@
   "type": "module",
   "version": "1.0.0",
   "description": "a headless phaser game engine to be run inside the phaser-game-server via jsdom",
-  "main": "dist/game-engine.js",
-  "types": "dist/game-engine.d.ts",
+  "main": "dist/game-server-engine.js",
+  "types": "dist/game-server-engine.d.ts",
   "scripts": {
     "clean": "rimraf ./dist",
     "build": "npm run clean && tsc -b",
