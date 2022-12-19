@@ -10,9 +10,10 @@ import { CommandLineOptions, OptionDefinition } from 'command-line-args';
 const cla = require('command-line-args');
 
 const availableOptions: Array<OptionDefinition> = [
-    {name: 'start', alias: 's', type: Boolean, defaultOption: false},
-    {name: 'end', alias: 'e', type: Boolean, defaultOption: false},
-    {name: 'background', alias: 'b', type: Boolean, defaultOption: false}
+    {name: 'start', alias: 's', type: Boolean, defaultValue: false},
+    {name: 'end', alias: 'e', type: Boolean, defaultValue: false},
+    {name: 'background', alias: 'b', type: Boolean, defaultValue: false},
+    {name: 'help', alias: 'h', type: Boolean, defaultValue: false}
 ];
 const outputFile = path.join(process.cwd(), '.phaser-game-server');
 
@@ -37,19 +38,32 @@ const startBackground = () => {
 }
 
 const startForeground = () => {
-    const server = new GameServer();
-    server.startGameEngine();
+    try {
+        const server = new GameServer();
+        server.startGameEngine();
+    } catch (e) {
+        console.error(e.message ?? e);
+        process.exit(1);
+    }
 }
 
 const endBackground = () => {
     if (fs.existsSync(outputFile)) {
         const id = fs.readFileSync(outputFile, {encoding: 'utf-8'});
         if (id != null) {
-            process.kill(+id, 'SIGINT');
+            try {
+                process.kill(+id, 'SIGINT');
+            } catch (e) {
+                console.error(`unable to kill process with id: ${id}.`, e.message ?? e);
+            }
         }
     } else {
         console.error(`no process id file could be found at: ${outputFile}`);
     }
+}
+
+const showHelp = () => {
+    console.log(`Usage:\n${availableOptions.map(o => `\t-${o.alias}, --${o.name}`).join('\n')}`);
 }
 
 const main = () => {
@@ -57,9 +71,15 @@ const main = () => {
         partial: true
     });
 
+    if (options.help || (!options.start && !options.end)) {
+        showHelp();
+        process.exit(0);
+    }
+
     if (options._unknown?.length) {
         console.error(`unknown command(s): ${options._unknown.join(' ')}`);
-        console.log(availableOptions);
+        showHelp();
+        process.exit(1);
     } else {
         if (options.start) {
             if (options.background) {
