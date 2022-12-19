@@ -1,8 +1,9 @@
 {
   "name": "usage-example",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "example usage of the phaser-game-server projects",
   "type": "module",
+  "private": true,
   "scripts": {
     "clean": "rimraf ./dist",
     "build": "npm run clean && webpack --env production",
