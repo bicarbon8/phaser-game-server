@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as process from 'process';
 import * as cp from 'child_process';
-import { GameServer } from "./game-server";
+import { GameServer, GameServerConfig } from "./game-server";
 import { CommandLineOptions, OptionDefinition } from 'command-line-args';
 
 const cla = require('command-line-args');
@@ -13,6 +13,7 @@ const availableOptions: Array<OptionDefinition> = [
     {name: 'start', alias: 's', type: Boolean, defaultValue: false},
     {name: 'end', alias: 'e', type: Boolean, defaultValue: false},
     {name: 'background', alias: 'b', type: Boolean, defaultValue: false},
+    {name: 'configuration', alias: 'c', type: String, defaultValue: 'server.config.json'},
     {name: 'help', alias: 'h', type: Boolean, defaultValue: false}
 ];
 const outputFile = path.join(process.cwd(), '.phaser-game-server');
@@ -37,9 +38,23 @@ const startBackground = () => {
     child.unref();
 }
 
-const startForeground = () => {
+const startForeground = (file: string) => {
     try {
-        const server = new GameServer();
+        let config: GameServerConfig;
+        if (!path.isAbsolute(file)) {
+            file = path.join(process.cwd(), file);
+        }
+        if (fs.existsSync(file)) {
+            console.info(`using configuration at: ${file}`);
+            const configStr = fs.readFileSync(file, {encoding: 'utf-8'});
+            if (configStr) {
+                config = JSON.parse(configStr);
+            }
+        } else {
+            throw `no configuration file found at: ${file}`;
+        }
+        
+        const server = new GameServer(config);
         server.startGameEngine();
     } catch (e) {
         console.error(e.message ?? e);
@@ -85,7 +100,7 @@ const main = () => {
             if (options.background) {
                 startBackground();
             } else {
-                startForeground();
+                startForeground(options.configuration);
             }
         }
         if (options.end) {

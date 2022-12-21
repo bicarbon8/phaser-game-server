@@ -6,11 +6,11 @@
   "private": true,
   "scripts": {
     "clean": "rimraf ./dist",
-    "build": "npm run clean && webpack --env production",
-    "build:dev": "npm run clean && webpack",
+    "build": "npm run clean && webpack",
     "start": "npm run build && npm run open",
-    "start:dev": "npm run build:dev && npm run open",
-    "open": "npx phaser-game-server -s",
+    "start:dev": "npm run build && npm run open:dev",
+    "open": "npx phaser-game-server -s -c server.config.prod.json",
+    "open:dev": "npx phaser-game-server -s",
     "test": ""
   },
   "keywords": [
@@ -29,7 +29,6 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
-    "file-replace-loader": "^1.4.0",
     "rimraf": "^3.0.2",
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",

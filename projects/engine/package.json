@@ -3,6 +3,10 @@
   "type": "module",
   "version": "1.0.1",
   "description": "a headless phaser game engine to be run inside the phaser-game-server via jsdom",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bicarbon8/phaser-game-server.git"
+  },
   "main": "dist/game-server-engine.js",
   "types": "dist/game-server-engine.d.ts",
   "scripts": {
