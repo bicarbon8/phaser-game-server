@@ -6,9 +6,11 @@
     "type": "git",
     "url": "https://github.com/bicarbon8/phaser-game-server.git"
   },
-  "bin": "dist/index.js",
-  "main": "dist/game-server.js",
-  "types": "dist/game-server.d.ts",
+  "bin": {
+    "phaser-game-server": "./dist/index.js"
+  },
+  "main": "./dist/game-server.js",
+  "types": "./dist/game-server.d.ts",
   "scripts": {
     "clean": "rimraf ./dist",
     "build": "npm run clean && tsc -b",
