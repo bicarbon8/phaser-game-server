@@ -6,7 +6,8 @@ import * as process from 'process';
 import * as cp from 'child_process';
 import { GameServer, GameServerConfig } from "./game-server";
 import { CommandLineOptions, OptionDefinition } from 'command-line-args';
-import cla from 'command-line-args';
+
+const cla = require('command-line-args');
 
 const availableOptions: Array<OptionDefinition> = [
     {name: 'start', alias: 's', type: Boolean, defaultValue: false},
