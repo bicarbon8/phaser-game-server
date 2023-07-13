@@ -47,7 +47,16 @@ export class ExampleGameEngine extends GameServerEngine {
          * scene here instead of in a separate
          * file
          */
-        super({scene: [ExampleScene]});
+        super({
+            scene: [ExampleScene],
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    debug: false,
+                    gravity: { x: 0, y: 0 },
+                }
+            }
+        });
     }
 }
 
@@ -55,6 +64,8 @@ export module ExampleGameEngine {
     export const game = new ExampleGameEngine().game;
 }
 ```
+> NOTE: the object passed to the `super` call above can contain any valid property from `Phaser.Types.Core.GameConfig` except: `type`, `scale`, `autoFocus`, `width`, or `height`.
+
 after the above you should bundle your code (see included `webpack.config.cjs` in the `usage-example` project) and create a `server.config.json` file containing your bundled script references (see included example in `usage-example` project). 
 
 to start the server use the following command:

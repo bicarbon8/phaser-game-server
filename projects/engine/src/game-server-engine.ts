@@ -7,21 +7,7 @@ declare global {
 
 declare const io: Server;
 
-export type GameEngineConfig = {
-    /**
-     * the `Phaser.Scene` or scenes to load into the game-engine
-     * 
-     * NOTE: once loaded only the first will be automatically started
-     */
-    scene: Function 
-    | Phaser.Scene 
-    | Phaser.Scene[] 
-    | Phaser.Types.Scenes.SettingsConfig 
-    | Phaser.Types.Scenes.SettingsConfig[] 
-    | Phaser.Types.Scenes.CreateSceneFromObjectConfig 
-    | Phaser.Types.Scenes.CreateSceneFromObjectConfig[] 
-    | Function[];
-}
+export type GameServerEngineConfig = Omit<Phaser.Types.Core.GameConfig, 'type' | 'scale' | 'autoFocus' | 'width' | 'height'>;
 
 export class GameServerEngine {
     private static readonly DEFAULT_CONFIG: Phaser.Types.Core.GameConfig = {
@@ -32,24 +18,17 @@ export class GameServerEngine {
             mode: Phaser.Scale.NONE,
             autoCenter: Phaser.Scale.NONE
         },
-        physics: {
-            default: 'arcade',
-            arcade: {
-                debug: false,
-                gravity: { x: 0, y: 0 },
-            }
-        },
         autoFocus: false
     };
 
     private _game: Phaser.Game;
     private _gameConfig: Phaser.Types.Core.GameConfig;
 
-    constructor(config: GameEngineConfig) {
+    constructor(config: GameServerEngineConfig) {
         console.debug('loaded game-engine file...');
         this._gameConfig = {
             ...GameServerEngine.DEFAULT_CONFIG,
-            scene: config.scene
+            ...config
         };
     }
 
