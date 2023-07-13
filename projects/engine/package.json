@@ -23,11 +23,11 @@
   "author": "Jason Holt Smith <bicarbon8@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "phaser": "^3.55.2",
-    "socket.io": "^4.5.4"
+    "phaser": "^3.60.0",
+    "socket.io": "^4.7.1"
   },
   "devDependencies": {
-    "rimraf": "^3.0.2",
-    "typescript": "^4.9.4"
+    "rimraf": "^5.0.1",
+    "typescript": "^5.1.6"
   }
 }
