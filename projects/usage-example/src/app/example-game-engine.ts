@@ -3,7 +3,16 @@ import { ExampleScene } from "./scenes/example-scene";
 
 export class ExampleGameEngine extends GameServerEngine {
     constructor() {
-        super({scene: [ExampleScene]});
+        super({
+            scene: [ExampleScene],
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    debug: false,
+                    gravity: { x: 0, y: 0 },
+                }
+            }
+        });
     }
 }
 
